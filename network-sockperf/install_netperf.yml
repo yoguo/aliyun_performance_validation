@@ -14,6 +14,7 @@
           - automake
           - libtool
           - sysstat
+          - pcp-libs
         state: present
 
     - name: Create directory for installation
