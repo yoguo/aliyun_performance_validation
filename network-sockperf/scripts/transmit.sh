@@ -79,7 +79,8 @@ fi
 killall -q sockperf
 rm -f /tmp/sockperf.log.*
 
-cpu_core=$(cat /proc/cpuinfo | grep process | wc -l)
+#cpu_core=$(cat /proc/cpuinfo | grep process | wc -l)
+cpu_core=64
 flavor=$(curl http://100.100.100.200/latest/meta-data/instance/instance-type 2>/dev/null)
 
 echo "---"
@@ -96,10 +97,10 @@ for ((n = 0; n < $duplicates; n++)); do
         port=$(($baseport + $n * 1000 + $i))
         echo "Starting test on port $port..."
         if [ "$trafficmode" = "pps" ]; then
-            sockperf tp -i $serverip --client_port $port --pps max -m 14 \
+            sockperf tp -i $serverip --pps max -m 14 \
                 -t $timeout --port $port &>/tmp/sockperf.log.$port &
         else
-            sockperf tp -i $serverip --client_port $port -m 50000 \
+            sockperf tp -i $serverip -m 50000 \
                 -t $timeout --port $port --tcp &>/tmp/sockperf.log.$port &
         fi
     done

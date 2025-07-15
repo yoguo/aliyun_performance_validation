@@ -1,5 +1,6 @@
 #FROM fedora:32
-FROM fedora:38
+#FROM fedora:38
+FROM public.ecr.aws/docker/library/fedora:38
 
 # Metadata
 LABEL author="Charles Shih"

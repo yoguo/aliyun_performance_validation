@@ -120,14 +120,16 @@ fi
 
 
 # Bind interrupts for PPS test(> 2000W) according to https://help.aliyun.com/document_detail/419630.html
-# On g8y/c8y/r8y instances, the device is virtio1 not virtio2
+# On g8y/c8y/r8y/c8a/r8a/c8ae/r8ae/ebmg6e/g9i/g9as/g9a/g9ae instances, the device is virtio1 not virtio2 (default)
 # Need to set cpu=64 for g8y/c8y/r8y on RHEL8 since the network card is on numa 1
-a=$(cat /proc/interrupts | grep virtio2-input | awk -F ':' '{print $1}')
-cpu=0
-for irq in $a; do
-    echo $cpu >/proc/irq/$irq/smp_affinity_list
-    let cpu+=2
-done
+# On ebmg8y/ebmc8y/ebmr8y/ebmg8i/ebmc8i/ebmc8ae/ebmg8a, the device is virtio0
+
+# a=$(cat /proc/interrupts | grep virtio1-input | awk -F ':' '{print $1}')
+# cpu=0
+# for irq in $a; do
+#     echo $cpu >/proc/irq/$irq/smp_affinity_list
+#     let cpu+=2
+# done
 
 # Trigger workload
 client_num=0
