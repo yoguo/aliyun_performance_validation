@@ -12,7 +12,7 @@ aliyun-python-sdk-slb==3.3.8
 aliyun-python-sdk-sts==3.0.2
 aliyun-python-sdk-vpc==3.0.14
 ansible
-ansible-alicloud==1.19.0
+ansible-alicloud==1.20.0
 ansible-alicloud-module-utils==1.5.0
 ansible-base
 ansible-core
