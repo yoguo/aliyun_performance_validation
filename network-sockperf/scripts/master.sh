@@ -143,6 +143,12 @@ done
 
 # Collect data
 safile=$logdir/master_${flavor}_${os}_${timestamp}.sa
+
+# Start sar on clients to collect network stats
+for client in $clients; do
+    ssh root@$client "sleep 20; sar -n DEV 1 $timeout" > $logdir/sar_sender_${client}.txt &
+done
+
 sleep 20 # ramp time
 sar -A 1 $timeout -o $safile &>/dev/null
 wait # waiting for clients
