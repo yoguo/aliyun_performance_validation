@@ -59,8 +59,9 @@ killall -q netperf
 
 for j in `seq 32`; do
     port=$[$baseport+j]
-    netperf -H ${serverip} -l $timeout -t TCP_STREAM  -p $port  -- -s 1024000 -S 1024000 -D &
+    netperf -H ${serverip} -l $timeout -t TCP_STREAM  -p $port  -- -s 10240000 -S 10240000 -D &
     #netperf -H ${serverip} -l $timeout -t TCP_STREAM  -p $port  -- -m 1440 -D &
+    #netperf -H ${serverip} -l $timeout -t TCP_STREAM  -p $port  -- -D &
 done
 
 wait
